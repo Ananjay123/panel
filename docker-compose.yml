@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  panel:
+    image: ghcr.io/pterodactyl/panel:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_USERNAME=pterodactyl
+      - DB_PASSWORD=yourpassword
+    volumes:
+      - ./data:/data
+  mariadb:
+    image: mariadb:10.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=pterodactyl
+      - MYSQL_USER=pterodactyl
+      - MYSQL_PASSWORD=yourpassword
+    volumes:
+      - ./mysql:/var/lib/mysql
